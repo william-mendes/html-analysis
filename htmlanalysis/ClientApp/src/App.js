@@ -1,20 +1,18 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router';
-import { Layout } from './components/Layout';
-import { Home } from './components/Home';
-import { FetchData } from './components/FetchData';
-import { Counter } from './components/Counter';
+import { Layout } from './components/Shared/Layout';
+import { Home } from './components/Home/Home';
+import { Report } from './components/Report/Report';
 
 export default class App extends Component {
-  displayName = App.name
+    displayName = App.name
 
-  render() {
-    return (
-      <Layout>
-        <Route exact path='/' component={Home} />
-        <Route path='/counter' component={Counter} />
-        <Route path='/fetchdata' component={FetchData} />
-      </Layout>
-    );
-  }
+    render() {
+        return (
+            <Layout>
+                <Route exact path='/' component={Home} />
+                <Route path='/admin' component={Report} />
+            </Layout>
+        );
+    }
 }

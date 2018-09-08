@@ -1,12 +1,15 @@
+using System.Net.Http;
+using HTMLAnalysis.Domain.Analysis;
+using HTMLAnalysis.Domain.Documents;
+using HTMLAnalysis.Domain.Frequencies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace octopuslabs
+namespace HTMLAnalysis
 {
     public class Startup
     {
@@ -20,6 +23,11 @@ namespace octopuslabs
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<HttpClient>()
+                .AddTransient<IDocumentService, DocumentService>()
+                .AddTransient<IAnalysisService, AnalysisService>()
+                .AddTransient<IFrequencyService, FrequencyService>();
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             // In production, the React files will be served from this directory

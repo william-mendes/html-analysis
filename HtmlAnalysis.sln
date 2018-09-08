@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "htmlanalysis", "htmlanalysis\htmlanalysis.csproj", "{02548DC1-0E8A-4BF7-AF88-C298A109521D}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "htmlanalysis-test", "htmlanalysis-test\htmlanalysis-test.csproj", "{826E590B-E4BC-410F-919B-8404C8C3D93D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{02548DC1-0E8A-4BF7-AF88-C298A109521D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{02548DC1-0E8A-4BF7-AF88-C298A109521D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{02548DC1-0E8A-4BF7-AF88-C298A109521D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{826E590B-E4BC-410F-919B-8404C8C3D93D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{826E590B-E4BC-410F-919B-8404C8C3D93D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{826E590B-E4BC-410F-919B-8404C8C3D93D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{826E590B-E4BC-410F-919B-8404C8C3D93D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

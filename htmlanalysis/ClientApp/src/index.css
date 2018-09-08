@@ -3,4 +3,9 @@
     body {
         padding-top: 50px;
     }
+
+    .words-frequency-list {
+        text-align: center;
+        list-style: none;
+    }
 }
