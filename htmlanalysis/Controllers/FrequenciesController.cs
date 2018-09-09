@@ -1,37 +1,36 @@
-﻿using System.Threading.Tasks;
-using HTMLAnalysis.Domain.Fetches;
-using HTMLAnalysis.Domain.Documents;
+﻿using System.Linq;
+using System.Threading.Tasks;
+using HTMLAnalysis.Domain;
 using HTMLAnalysis.Domain.Frequencies;
 using Microsoft.AspNetCore.Mvc;
-using HTMLAnalysis.Domain;
 
 namespace HTMLAnalysis.Controllers
 {
     [Route("api/[controller]")]
     public class FrequenciesController : Controller
     {
-        private readonly IDocumentService _documentService;
-        private readonly IFetchService _analysisService;
-        private readonly IFrequencyRepository _frequencyService;
+        readonly IDocumentService _documentService;
+        readonly IFetchService _fetchService;
+        readonly IFrequencyRepository _frequencyService;
 
 
         public FrequenciesController(
             IDocumentService documentService,
-            IFetchService analysisService,
+            IFetchService fetchService,
             IFrequencyRepository frequencyService)
         {
             _documentService = documentService;
-            _analysisService = analysisService;
+            _fetchService = fetchService;
             _frequencyService = frequencyService;
         }
 
-        [HttpGet("[action]")]
-        public async Task<IActionResult> Read([FromQuery] string url)
+        [HttpPost("[action]")]
+        public async Task<IActionResult> Fetch([FromBody] string url)
         {
             var document = await _documentService.DownloadIntoDocumentAsync(url).ConfigureAwait(false);
             if (document != null)
             {
-                var analysis = _analysisService.Analyse(document);
+                var analysis = _fetchService.Analyse(document);
                 return Ok(analysis);
             }
 
@@ -42,7 +41,7 @@ namespace HTMLAnalysis.Controllers
         public async Task<IActionResult> GetAll()
         {
             var topFrequencies = await _frequencyService.GetAll().ConfigureAwait(false);
-            if (topFrequencies != null)
+            if (topFrequencies != null && topFrequencies.Any())
             {
                 return Ok(topFrequencies);
             }

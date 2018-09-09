@@ -6,14 +6,14 @@ using Xunit;
 
 namespace HTMLAnalysis.Domain.Fetches
 {
-    public class AnalysisResultTest
+    public class FetchTest
     {
         static readonly IEnumerable<string> Words = new[] { "word1", "word2", "word1", "word3", "word1", "word4", "word31" };
 
         readonly Mock<IDocument> _documentMock;
         readonly Fetch _analysis;
 
-        public AnalysisResultTest()
+        public FetchTest()
         {
             _documentMock = new Mock<IDocument>();
             _documentMock.SetupGet(x => x.Words).Returns(Words);
