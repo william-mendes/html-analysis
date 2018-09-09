@@ -1,0 +1,1005 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keywords" content=" overview, about">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@stanfordnlp">
+    <meta name="twitter:creator" content="@stanfordnlp">
+    <meta name="twitter:title" content="Stanford CoreNLP">
+    <meta name="twitter:description" content="High-performance human language analysis tools. Widely used, available open source; written in Java.">
+    <meta name="twitter:image" content="https://stanfordnlp.github.io/CoreNLP/images/Cate-Blanchett.png">
+    <title> Stanford CoreNLP &ndash; Natural language software   | Stanford CoreNLP</title>
+    <link rel="stylesheet" type="text/css" href="https://stanfordnlp.github.io/CoreNLP/css/syntax.css">
+    <link rel="stylesheet" type="text/css" href="https://stanfordnlp.github.io/CoreNLP/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="https://stanfordnlp.github.io/CoreNLP/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://stanfordnlp.github.io/CoreNLP/css/modern-business.css">
+    <link rel="stylesheet" type="text/css" href="https://stanfordnlp.github.io/CoreNLP/css/lavish-bootstrap.css">
+    <link rel="canonical" href="/">
+    <link rel="stylesheet" type="text/css" href="https://stanfordnlp.github.io/CoreNLP/css/customstyles.css">
+    <link rel="stylesheet" type="text/css" href="https://stanfordnlp.github.io/CoreNLP/css/theme-cardinal.css">
+    <link rel="canonical" href="/">
+    <link rel="alternate" type="application/rss+xml" title="CoreNLP" href="feed.xml" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script src="js/jquery.navgoco.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="js/toc.js"></script>
+    <script src="js/customscripts.js"></script>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+
+
+
+
+    <script>$(function () {
+      $('[data-toggle="tooltip"]').tooltip()
+  })</script>
+
+
+
+
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container topnavlinks">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+                <a class="fa fa-home fa-lg navbar-brand" href="index.html">&nbsp;<span class="projectTitle"> Stanford CoreNLP</span></a>
+
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <!-- entries without drop-downs appear here -->
+                    <!-- conditional logic to control which topnav appears for the audience defined in the configuration file.-->
+
+
+
+
+
+
+
+                    <li><a href="https://github.com/stanfordnlp/CoreNLP" target="_blank">Github repo</a></li>
+
+
+
+
+
+                    <!-- entries with drop-downs appear here -->
+                    <!-- conditional logic to control which topnav appears for the audience defined in the configuration file.-->
+                    <li class="dropdown">
+
+
+
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Quick links<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+
+
+
+                            <li><a href="http://corenlp.run/" target="_blank">Online demo (Webservice API)</a></li>
+
+
+
+
+
+                            <li><a href="http://nlp.stanford.edu:8080/corenlp/" target="_blank">Online demo (Traditional)</a></li>
+
+
+
+
+
+                            <li><a href="http://mvnrepository.com/artifact/edu.stanford.nlp/stanford-corenlp" target="_blank">Maven Central</a></li>
+
+
+
+
+
+                            <li><a href="https://www.nuget.org/packages/Stanford.NLP.CoreNLP/" target="_blank">NuGet (.NET)</a></li>
+
+
+
+
+
+                            <li><a href="other-languages.html">Other languages/packages</a></li>
+
+
+
+
+
+                            <li><a href="http://www.anthology.aclweb.org/P/P14/P14-5010.pdf" target="_blank">Paper to cite</a></li>
+
+
+
+
+
+                            <li><a href="http://stackoverflow.com/questions/tagged/stanford-nlp" target="_blank">Stack Overflow</a></li>
+
+
+
+
+
+                            <li><a href="https://twitter.com/stanfordnlp" target="_blank">Twitter</a></li>
+
+
+
+
+                        </ul>
+                    </li>
+
+
+
+                    <!-- special insertion -->
+
+
+            </div>
+            <!-- /.container -->
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+        <div class="col-lg-12">&nbsp;</div>
+
+        <!-- Content Row -->
+        <div class="row">
+            <!-- Sidebar Column -->
+            <div class="col-md-3">
+                <script>$(document).ready(function() {
+// Initialize navgoco with default options
+$("#mysidebar").navgoco({
+caretHtml: '',
+accordion: true,
+//accordion: true,
+openClass: 'active', // open
+save: true, // leave false or nav highlighting doesn't work right
+cookie: {
+name: 'navgoco',
+expires: false,
+path: '/'
+},
+slide: {
+duration: 000,
+easing: 'swing'
+}
+});
+
+$("#collapseAll").click(function(e) {
+e.preventDefault();
+$("#mysidebar").navgoco('toggle', false);
+});
+
+$("#expandAll").click(function(e) {
+e.preventDefault();
+$("#mysidebar").navgoco('toggle', true);
+});
+
+});</script>
+
+
+
+                <ul id="mysidebar" class="nav">
+                    <div class="siteTagline">CoreNLP</div>
+                    <div class="versionTagline">version 3.9.1</div>
+
+
+
+                    <li>
+                        <a href="#">Overview</a>
+
+                        <ul>
+
+
+
+
+
+                            <li><a href="index.html">About</a></li>
+
+
+                    </li>
+
+
+
+
+
+                    <li><a href="index.html#download">Download</a></li>
+
+
+                    </li>
+
+
+
+
+
+                    <li><a href="index.html#human-languages-supported">Languages</a></li>
+
+
+                    </li>
+
+
+
+
+
+                    <li><a href="index.html#license">License and Citing</a></li>
+
+
+                    </li>
+
+
+
+                </ul>
+
+                </li>
+
+
+
+
+
+                <li>
+                    <a href="#">Usage</a>
+
+                    <ul>
+
+
+
+
+
+                        <li><a href="download.html">Download / Maven</a></li>
+
+
+                </li>
+
+
+
+
+
+                <li><a href="migration.html">Migration Guide</a></li>
+
+
+                </li>
+
+
+
+
+
+                <li><a href="cmdline.html">Command line usage</a></li>
+
+
+                </li>
+
+
+
+
+
+                <li><a href="api.html">Stanford CoreNLP API</a></li>
+
+
+                </li>
+
+
+
+
+
+                <li><a href="simple.html">Simple CoreNLP API</a></li>
+
+
+                </li>
+
+
+
+
+
+                <li><a href="repl.html">Interactive mode (REPL)</a></li>
+
+
+                </li>
+
+
+
+
+
+                <li><a href="corenlp-server.html">CoreNLP server</a></li>
+
+
+                </li>
+
+
+
+
+
+                <li><a href="caseless.html">Caseless operation</a></li>
+
+
+                </li>
+
+
+
+
+
+                <li><a href="human-languages.html">On other human languages</a></li>
+
+
+                </li>
+
+
+
+
+
+                <li><a href="other-languages.html">From other languages/packages</a></li>
+
+
+                </li>
+
+
+
+                </ul>
+
+                </li>
+
+
+
+
+
+                <li>
+                    <a href="#">Annotators</a>
+
+                    <ul>
+
+
+
+
+
+                        <li><a href="annotators.html">Summary</a></li>
+
+
+                </li>
+
+
+
+
+
+                <li><a href="dependencies.html">Annotator dependencies</a></li>
+
+
+                </li>
+
+
+
+
+
+                <li><a href="tokenize.html">Tokenization</a></li>
+
+
+                </li>
+
+
+
+
+
+                <li><a href="ssplit.html">Sentence Splitting</a></li>
+
+
+                </li>
+
+
+
+
+
+                <li><a href="lemma.html">Lemmatization</a></li>
+
+
+                </li>
+
+
+
+
+
+                <li><a href="pos.html">Parts of Speech</a></li>
+
+
+                </li>
+
+
+
+
+
+                <li><a href="ner.html">Named Entity Recognition</a></li>
+
+
+                </li>
+
+
+
+
+
+                <li><a href="regexner.html">RegexNER (Named Entity Recognition)</a></li>
+
+
+                </li>
+
+
+
+
+
+                <li><a href="parse.html">Constituency Parsing</a></li>
+
+
+                </li>
+
+
+
+
+
+                <li><a href="depparse.html">Dependency Parsing</a></li>
+
+
+                </li>
+
+
+
+
+
+                <li><a href="coref.html">Coreference Resolution</a></li>
+
+
+                </li>
+
+
+
+
+
+                <li><a href="natlog.html">Natural Logic</a></li>
+
+
+                </li>
+
+
+
+
+
+                <li><a href="openie.html">Open Information Extraction</a></li>
+
+
+                </li>
+
+
+
+
+
+                <li><a href="sentiment.html">Sentiment</a></li>
+
+
+                </li>
+
+
+
+
+
+                <li><a href="relation.html">Relation Extraction</a></li>
+
+
+                </li>
+
+
+
+
+
+                <li><a href="quote.html">Quote Annotator</a></li>
+
+
+                </li>
+
+
+
+
+
+                <li><a href="cleanxml.html">CleanXML Annotator</a></li>
+
+
+                </li>
+
+
+
+
+
+                <li><a href="truecase.html">True case Annotator</a></li>
+
+
+                </li>
+
+
+
+
+
+                <li><a href="entitymentions.html">Entity Mentions Annotator</a></li>
+
+
+                </li>
+
+
+
+
+
+                <li><a href="udfeats.html">UD Features</a></li>
+
+
+                </li>
+
+
+
+
+
+                <li><a href="new_annotator.html">Adding a new annotator</a></li>
+
+
+                </li>
+
+
+
+                </ul>
+
+                </li>
+
+
+
+
+
+                <li>
+                    <a href="#">Additional tools</a>
+
+                    <ul>
+
+
+
+
+
+                        <li><a href="tokensregex.html">TokensRegex</a></li>
+
+
+                </li>
+
+
+
+
+
+                <li><a href="patterns.html">Bootstrapped surface patterns</a></li>
+
+
+                </li>
+
+
+
+
+
+                <li><a href="extensions.html">Extensions</a></li>
+
+
+                </li>
+
+
+
+                </ul>
+
+                </li>
+
+
+
+
+
+                <li>
+                    <a href="#">Resources</a>
+
+                    <ul>
+
+
+
+
+
+                        <li><a href="faq.html">FAQ</a></li>
+
+
+                </li>
+
+
+
+
+
+                <li><a href="tutorials.html">Tutorials</a></li>
+
+
+                </li>
+
+
+
+
+
+                <li><a href="memory-time.html">Memory and time optimization</a></li>
+
+
+                </li>
+
+
+
+
+
+                <li><a href="pipelines.html">Annotation pipelines</a></li>
+
+
+                </li>
+
+
+
+
+
+                <li><a href="http://corenlp.run/" target="_blank">Online demo (API)</a></li>
+
+
+                </li>
+
+
+
+
+
+                <li><a href="http://nlp.stanford.edu:8080/corenlp/" target="_blank">Online demo (old skool)</a></li>
+
+
+                </li>
+
+
+
+
+
+                <li><a href="http://nlp.stanford.edu/nlp/javadoc/javanlp/" target="_blank">Javadoc</a></li>
+
+
+                </li>
+
+
+
+
+
+                <li><a href="history.html">Release history</a></li>
+
+
+                </li>
+
+
+
+
+
+                <li><a href="contact.html">Contact</a></li>
+
+
+                </li>
+
+
+
+                </ul>
+
+                </li>
+
+
+
+                </ul>
+
+
+            </div>
+            <!-- this highlights the active parent class in the navgoco sidebar. this is critical so that the parent expands when you're viewing a page. This must appear below the sidebar code above.-->
+            <script>$("li.active").parents('li').toggleClass("active");</script>
+
+            <!-- Content Column -->
+            <div class="col-md-9">
+                <div class="post-header">
+                    <h1 class="post-title-main"> Stanford CoreNLP &ndash; Natural language software </h1>
+                </div>
+                <div class="post-content">
+
+                    <!-- this handles the automatic toc. use ## for subheads to auto-generate the on-page minitoc. if you use html tags, you must supply an ID for the heading element in order for it to appear in the minitoc. -->
+                    <script>$( document ).ready(function() {
+  // Handler for .ready() called.
+
+$('#toc').toc({ minimumHeaders: 0, listType: 'ul', showSpeed: 0, headers: 'h2,h3,h4' });
+
+/* this offset helps account for the space taken up by the floating toolbar. */
+$('#toc').on('click', 'a', function() {
+  var target = $(this.getAttribute('href'))
+    , scroll_target = target.offset().top
+
+  $(window).scrollTop(scroll_target - 10);
+  return false
+})
+
+});</script>
+                    <div id="toc"></div>
+
+                    <h2 id="about">About</h2>
+                    <p>
+                        Stanford CoreNLP provides a set of human language technology
+                        tools. It can give the base
+                        forms of words, their parts of speech, whether they are names of
+                        companies, people, etc., normalize dates, times, and numeric quantities,
+                        mark up the structure of sentences in terms of
+                        phrases and syntactic dependencies, indicate which noun phrases refer to
+                        the same entities, indicate sentiment,
+                        extract particular or open-class relations between entity mentions,
+                        get the quotes people said, etc.
+                    </p>
+                    <p>Choose Stanford CoreNLP if you need:</p>
+                    <ul>
+                        <li>An integrated NLP toolkit with a broad range of grammatical analysis tools</li>
+                        <li>A fast, robust annotator for arbitrary texts, widely used in production</li>
+                        <li>A modern, regularly updated package, with the overall highest quality text analytics</li>
+                        <li>Support for a number of major (human) languages</li>
+                        <li>Available APIs for most major modern programming languages</li>
+                        <li>Ability to run as a simple web service</li>
+                    </ul>
+                    <p>
+                        Stanford CoreNLP’s goal is to
+                        make it very easy to apply a bunch of linguistic analysis tools to a piece
+                        of text. A tool pipeline can be run on a piece of plain text with
+                        just two lines of code. CoreNLP is designed to be highly
+                        flexible and extensible.  With a single option you can change which
+                        tools should be enabled and disabled.
+                        Stanford CoreNLP integrates many of Stanford’s NLP tools,
+                        including <a href="http://nlp.stanford.edu/software/tagger.html">the part-of-speech (POS) tagger</a>,
+                        <a href="http://nlp.stanford.edu/software/CRF-NER.html">the named entity recognizer (NER)</a>,
+                        <a href="http://nlp.stanford.edu/software/lex-parser.html">the parser</a>,
+                        <a href="http://nlp.stanford.edu/software/dcoref.html">the coreference resolution system</a>,
+                        <a href="http://nlp.stanford.edu/sentiment/">sentiment analysis</a>,
+                        <a href="http://nlp.stanford.edu/software/patternslearning.html">bootstrapped pattern learning</a>,
+                        and the
+                        <a href="http://nlp.stanford.edu/software/openie.html">open information extraction</a>
+                        tools. Moreover, an annotator pipeline can include additional custom or third-party annotators.
+                        CoreNLP’s analyses provide the foundational building blocks for
+                        higher-level and domain-specific text understanding applications.
+                    </p>
+                    <p><img src="https://stanfordnlp.github.io/CoreNLP/images/Xi-Jinping.png" alt="CoreNLP screenshot" /></p>
+                    <h2 id="download">Download</h2>
+                    <p>Stanford CoreNLP can be downloaded via the link below. This will download a large (~500 MB) zip file containing (1) the CoreNLP code jar, (2) the CoreNLP models jar (required in your classpath for most tasks), (3) the libraries required to run CoreNLP, and (4) documentation / source code for the project. Unzip this file, open the folder that results and you’re ready to use it.</p>
+                    <div style="text-align:center; margin-top: 5ex; margin-bottom:5ex;"> <a class="downloadbutton" href="http://nlp.stanford.edu/software/stanford-corenlp-full-2018-02-27.zip">Download CoreNLP 3.9.1 </a> </div>
+                    <p>
+                        Alternatively, Stanford CoreNLP is <a href="http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22stanford-corenlp%22">available on <strong>Maven Central</strong></a>.
+                        Source is <a href="https://github.com/stanfordnlp/CoreNLP">available on <strong>GitHub</strong></a>.
+                        For more information on obtaining CoreNLP, see the <a href="download.html">download page</a>.
+                        To download earlier versions of Stanford CoreNLP or language packs for earlier versions, go to the <a href="history.html">history page</a>.
+                    </p>
+                    <p>
+                        <em>Note:</em> Stanford CoreNLP 3.9.1 requires a minimum of Java 8, but also
+                        works with Java 9 and 10.  However, the SUTime component uses the
+                        jollyday library which depends on JAXB, a Java EE component which
+                        started to be removed in Java 9. If using Java 9 or 10, you either
+                        need to add this Java flag to your command for CoreNLP to run:
+                    </p>
+                    <div class="highlighter-rouge">
+                        <div class="highlight">
+                            <pre class="highlight"><code>--add-modules java.se.ee
+</code></pre>
+                        </div>
+                    </div>
+                    <p>or you need to add JAXB dependencies (see <a href="https://stackoverflow.com/questions/48204141/replacements-for-deprecated-jpms-modules-with-java-ee-apis">this StackOverflow answer</a>). This second solution will become mandatory with Java 11. We’ll try to update the download package in advance of that….</p>
+                    <p>
+                        The table below has jars for the current release with all the models for each language we support.
+                        Due to size issues we have divided the English resources into two
+                        jars.  The English (KBP) models jar contains extra resources needed to
+                        run relation extraction and entity linking.
+                    </p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="text-align: left">Language</th>
+                                <th style="text-align: left">model jar</th>
+                                <th style="text-align: left">version</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="text-align: left">Arabic</td>
+                                <td style="text-align: left"><a href="http://nlp.stanford.edu/software/stanford-arabic-corenlp-2018-02-27-models.jar">download</a></td>
+                                <td style="text-align: left">3.9.1</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: left">Chinese</td>
+                                <td style="text-align: left"><a href="http://nlp.stanford.edu/software/stanford-chinese-corenlp-2018-02-27-models.jar">download</a></td>
+                                <td style="text-align: left">3.9.1</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: left">English</td>
+                                <td style="text-align: left"><a href="http://nlp.stanford.edu/software/stanford-english-corenlp-2018-02-27-models.jar">download</a></td>
+                                <td style="text-align: left">3.9.1</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: left">English (KBP)</td>
+                                <td style="text-align: left"><a href="http://nlp.stanford.edu/software/stanford-english-kbp-corenlp-2018-02-27-models.jar">download</a></td>
+                                <td style="text-align: left">3.9.1</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: left">French</td>
+                                <td style="text-align: left"><a href="http://nlp.stanford.edu/software/stanford-french-corenlp-2018-02-27-models.jar">download</a></td>
+                                <td style="text-align: left">3.9.1</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: left">German</td>
+                                <td style="text-align: left"><a href="http://nlp.stanford.edu/software/stanford-german-corenlp-2018-02-27-models.jar">download</a></td>
+                                <td style="text-align: left">3.9.1</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: left">Spanish</td>
+                                <td style="text-align: left"><a href="http://nlp.stanford.edu/software/stanford-spanish-corenlp-2018-02-27-models.jar">download</a></td>
+                                <td style="text-align: left">3.9.1</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <h2 id="human-languages-supported">Human languages supported</h2>
+                    <p>
+                        The basic distribution provides model files for the analysis of well-edited <strong>English</strong>,
+                        but the engine is compatible with models for other languages. In the
+                        table above, we provide packaged models for
+                        <strong>Arabic</strong>, <strong>Chinese</strong>, <strong>French</strong>, <strong>German</strong>, and <strong>Spanish</strong>.
+                        We also provide two jars that contain all of our
+                        English models, which include various variant models, and in particular models
+                        optimized for working with uncased English (e.g., mostly or all
+                        either uppercase or lowercase).
+                        There is also some third party support for additional languages (and
+                        we would welcome more!). You can find out more about using CoreNLP with
+                        various human languages on the
+                        <a href="human-languages.html">other human languages</a> page.
+                    </p>
+                    <h2 id="programming-languages-and-operating-systems">Programming languages and operating systems</h2>
+                    <p>
+                        Stanford CoreNLP is written in <strong>Java</strong>; recent releases  require
+                        <strong>Java 1.8+</strong>. You need to have Java installed to run
+                        CoreNLP. However, you can interact with CoreNLP via the command-line
+                        or its web service;
+                        many people use CoreNLP while writing their own code in Javascript,
+                        Python, or some other language.
+                    </p>
+                    <p>
+                        You can use Stanford CoreNLP from the <a href="cmdline.html">command-line</a>,
+                        via its original Java
+                        <a href="api.html">programmatic API</a>, via the object-oriented <a href="https://stanfordnlp.github.io/CoreNLP/simple.html">simple API</a>,
+                        via <a href="other-languages.html">third party APIs</a> for most major modern
+                        programming languages, or via a <a href="corenlp-server.html">web service</a>.
+                        It works on Linux, macOS, and Windows.
+                    </p>
+                    <h2 id="license">License</h2>
+                    <p>
+                        Stanford CoreNLP is licensed under the <a href="http://www.gnu.org/licenses/gpl.html">GNU General Public License</a>
+                        (v3 or later; in general Stanford NLP
+                        code is GPL v2+, but CoreNLP uses several Apache-licensed libraries, and so the composite is v3+).
+                        Note that the license is the <i>full</i> GPL,
+                        which allows many free uses, but not its use in
+                        <a href="http://www.gnu.org/licenses/gpl-faq.html#GPLInProprietarySystem">proprietary software</a>
+                        which is distributed to others.
+                        For distributors of
+                        <a href="http://www.gnu.org/licenses/gpl-faq.html#GPLInProprietarySystem">proprietary software</a>,
+                        CoreNLP is also available from Stanford under a
+                        <a href="http://techfinder.stanford.edu/technology_detail.php?ID=29724">commercial licensing</a>
+                        You can contact us at
+                        <a href="mailto:java-nlp-support@lists.stanford.edu">java-nlp-support@lists.stanford.edu</a>.
+                        If you don’t need a commercial license, but would like to support
+                        maintenance of these tools, we welcome gift funding:
+                        use <a href="http://giving.stanford.edu/goto/writeingift">this form</a>
+                        and write “Stanford NLP Group open source software” in the Special Instructions.
+                    </p>
+                    <h2 id="citing-stanford-corenlp-in-papers">Citing Stanford CoreNLP in papers</h2>
+                    <p>If you’re just running the CoreNLP pipeline, please cite this CoreNLP paper:</p>
+                    <blockquote>
+                        <p>Manning, Christopher D., Mihai Surdeanu, John Bauer, Jenny Finkel, Steven J. Bethard, and David McClosky. 2014. <a href="http://nlp.stanford.edu/pubs/StanfordCoreNlp2014.pdf">The Stanford CoreNLP Natural Language Processing Toolkit</a> In <em>Proceedings of the 52nd Annual Meeting of the Association for Computational Linguistics: System Demonstrations</em>, pp. 55-60. [<a href="http://nlp.stanford.edu/pubs/StanfordCoreNlp2014.pdf">pdf</a>] [<a href="http://nlp.stanford.edu/pubs/StanfordCoreNlp2014.bib">bib</a>]</p>
+                    </blockquote>
+                    <p>
+                        If you’re dealing in depth with particular annotators,
+                        you’re also encouraged to cite the papers that cover individual
+                        components:
+                        <a href="http://nlp.stanford.edu/software/tagger.html">POS tagging</a>,
+                        <a href="http://nlp.stanford.edu/software/CRF-NER.html">NER</a>,
+                        <a href="http://nlp.stanford.edu/software/lex-parser.html">constituency parsing</a>,
+                        <a href="http://nlp.stanford.edu/software/nndep.html">dependency parsing</a>,
+                        <a href="http://nlp.stanford.edu/software/dcoref.html">coreference resolution</a>,
+                        <a href="http://nlp.stanford.edu/sentiment/">sentiment</a>, or <a href="http://nlp.stanford.edu/software/openie.html">Open IE</a>.
+                        You can find more information on the Stanford NLP
+                        <a href="http://nlp.stanford.edu/software/">software pages</a> and/or
+                        <a href="http://nlp.stanford.edu/pubs/">publications page</a>.
+                    </p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    <div class="tags">
+
+                    </div>
+
+                </div>
+                <hr class="shaded" />
+                <footer></footer>
+            </div><!-- /.row -->
+        </div>    <!-- /.container -->
+</body>
+
+</html>
