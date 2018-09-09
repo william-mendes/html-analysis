@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using HTMLAnalysis.Domain.Documents;
 using HTMLAnalysis.Domain.Frequencies;
 
 namespace HTMLAnalysis.Domain.Fetches
@@ -10,7 +9,7 @@ namespace HTMLAnalysis.Domain.Fetches
         public Fetch(IDocument document)
         {
             Source = document.Source;
-            Frequencies = FrequencyListFrom(document);
+            Frequencies = FrequencyListFrom(ExtractFrequenciesFrom(document));
         }
 
         public string Source { get; private set; }
@@ -22,8 +21,8 @@ namespace HTMLAnalysis.Domain.Fetches
                 .FirstOrDefault(f => f.Word.Equals(word))
                 ?.Count;
 
-        static IEnumerable<IFrequency> FrequencyListFrom(IDocument document) => 
-            ExtractFrequenciesFrom(document)
+        static IEnumerable<IFrequency> FrequencyListFrom(IDictionary<string, int> dictionary) =>
+            dictionary
                 .ToList()
                 .OrderByDescending(d => d.Value)
                 .ToArray()

@@ -1,6 +1,7 @@
 using System.Net.Http;
 using HTMLAnalysis.Domain;
 using HTMLAnalysis.Domain.Documents;
+using HTMLAnalysis.Domain.Encryption;
 using HTMLAnalysis.Domain.Fetches;
 using HTMLAnalysis.Domain.Frequencies;
 using HTMLAnalysis.Infra;
@@ -29,7 +30,9 @@ namespace HTMLAnalysis
             services.AddTransient<HttpClient>()
                     .AddTransient<IDocumentService, DocumentService>()
                     .AddTransient<IFetchService, FetchService>()
-                    .AddTransient<IFrequencyRepository, FrequencyRepository>();
+                    .AddTransient<IFetchRepository, FetchRepository>()
+                    .AddTransient<IFrequencyRepository, FrequencyRepository>()
+                    .AddTransient<IEncryptionService, EncryptionService>();
 
             services.AddEntityFrameworkMySql()
                     .AddDbContext<WebFrequenciesDbContext>(options =>

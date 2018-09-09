@@ -23,7 +23,7 @@ namespace HTMLAnalysis.Domain.Documents
 
         public IEnumerable<string> Words { get; private set; }
 
-        static IEnumerable<string> ExtractPhrasesFromBody(string body)
+        private static IEnumerable<string> ExtractPhrasesFromBody(string body)
         {
             return
                 Regex.Replace(body, @"<(.|\n)*?>", "")
@@ -33,7 +33,7 @@ namespace HTMLAnalysis.Domain.Documents
                 .ToArray();
         }
 
-        static IEnumerable<string> ExtractWordsFrom(IEnumerable<string> phrases)
+        private static IEnumerable<string> ExtractWordsFrom(IEnumerable<string> phrases)
         {
             return phrases
                 .SelectMany(phrase => phrase.Split(Tokens.Words))

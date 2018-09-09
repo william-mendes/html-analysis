@@ -1,4 +1,5 @@
-﻿using HTMLAnalysis.Domain.Documents;
+﻿using System.Threading.Tasks;
+using HTMLAnalysis.Domain.Documents;
 
 namespace HTMLAnalysis.Domain
 {
@@ -15,6 +16,6 @@ namespace HTMLAnalysis.Domain
         /// </summary>
         /// <returns>An instance of <see cref="IFetch"/> with statistical information about the <see cref="IDocument"/></returns>
         /// <param name="document">Document to be analysed.</param>
-        IFetch Analyse(IDocument document);
+        Task<IFetch> ProcessAsync(IDocument document);
     }
 }

@@ -12,7 +12,7 @@ namespace HTMLAnalysis.Domain.Tokenization
 
             var words = new List<char>();
             words.AddRange(phrases);
-            words.AddRange(new[]  { ':', ';', '–', '-', ',', '\n', '\r', '\t', ' ', '(', ')', '[', ']', '<', '>', '=', '"', '/', '\'' });
+            words.AddRange(new[]  { ':', ';', '–', '_', '-', ',', '\n', '\r', '\t', ' ', '(', ')', '[', ']', '{', '}', '<', '>', '=', '"', '/', '\'' });
             Words = words.ToArray();
         }
 

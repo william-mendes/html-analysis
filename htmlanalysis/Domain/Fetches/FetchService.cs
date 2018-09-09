@@ -1,4 +1,6 @@
-﻿namespace HTMLAnalysis.Domain.Fetches
+﻿using System.Threading.Tasks;
+
+namespace HTMLAnalysis.Domain.Fetches
 {
     public class FetchService : IFetchService
     {
@@ -9,10 +11,10 @@
             _repository = repository;
         }
 
-        public IFetch Analyse(IDocument document)
+        public async Task<IFetch> ProcessAsync(IDocument document)
         {
             var fetch = new Fetch(document);
-            _repository.Persist(fetch);
+            await _repository.PersistAsync(fetch, 100);
             return fetch;
         }
     }
