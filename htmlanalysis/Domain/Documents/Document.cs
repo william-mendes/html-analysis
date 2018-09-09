@@ -29,6 +29,7 @@ namespace HTMLAnalysis.Domain.Documents
                 Regex.Replace(body, @"<(.|\n)*?>", "")
                 .Split(Tokens.Phrases)
                 .Select(phrase => phrase.Trim())
+                .Select(phrase => Regex.Replace(phrase, "\"([^\"]*)\"", ""))
                 .Where(phrase => !string.IsNullOrEmpty(phrase))
                 .ToArray();
         }
@@ -39,6 +40,8 @@ namespace HTMLAnalysis.Domain.Documents
                 .SelectMany(phrase => phrase.Split(Tokens.Words))
                 .Select(word => word.Trim())
                 .Where(phrase => !string.IsNullOrEmpty(phrase))
+                .Where(phrase => !Tokens.Articles.Contains(phrase.ToLower()))
+                .Where(phrase => !Tokens.Prepositions.Contains(phrase.ToLower()))
                 .ToArray();
         }
     }

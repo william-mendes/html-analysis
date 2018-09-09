@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using HTMLAnalysis.Domain.Frequencies;
 using HTMLAnalysis.Infra;
 using HTMLAnalysis.TestFixtures;
 using HTMLAnalysis.TestUtils;
@@ -7,13 +8,19 @@ using Xunit;
 
 namespace HTMLAnalysis.Domain.Fetches
 {
-    public class FetchRepositoryTest
+    /// <summary>
+    /// Fetch repository slice test.
+    /// Covers integration of the slice <see cref="IFetchRepository"/>,
+    /// <see cref="IFrequencyAdapter"/> and <see cref="WebFrequenciesDbContext"/>,
+    /// but mocks <see cref="IEncryptionService"/>.
+    /// </summary>
+    public class FetchRepositorySliceTest
     {
         readonly WebFrequenciesDbContext _context;
         readonly Mock<IEncryptionService> _encryptionServiceMock;
         readonly Mock<IFetch> _fetchMock;
 
-        public FetchRepositoryTest()
+        public FetchRepositorySliceTest()
         {
             _context = TestDbContextUtils.NewTestContext;
             _encryptionServiceMock = new Mock<IEncryptionService>();
@@ -73,8 +80,8 @@ namespace HTMLAnalysis.Domain.Fetches
             var expected = "encrypted-word";
 
             _encryptionServiceMock
-                .Setup(x => x.EncryptedWord(It.IsAny<string>(), It.IsAny<string>()))
-                .Returns<string, string>((word, hashedSalt) => expected);
+                .Setup(x => x.EncryptedWord(It.IsAny<string>()))
+                .Returns<string>((word) => expected);
 
             var fetch = _fetchMock.Object;
             Repository.PersistAsync(fetch, 1);
@@ -140,7 +147,7 @@ namespace HTMLAnalysis.Domain.Fetches
         }
 
         IFetchRepository Repository => new FetchRepository(
-            _encryptionServiceMock.Object,
+            new FrequencyAdapter(_encryptionServiceMock.Object),
             _context);
     }
 }

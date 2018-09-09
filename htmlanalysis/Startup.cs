@@ -32,7 +32,8 @@ namespace HTMLAnalysis
                     .AddTransient<IFetchService, FetchService>()
                     .AddTransient<IFetchRepository, FetchRepository>()
                     .AddTransient<IFrequencyRepository, FrequencyRepository>()
-                    .AddTransient<IEncryptionService, EncryptionService>();
+                    .AddTransient<IEncryptionService, EncryptionService>()
+                    .AddTransient<IFrequencyAdapter, FrequencyAdapter>();
 
             services.AddEntityFrameworkMySql()
                     .AddDbContext<WebFrequenciesDbContext>(options =>

@@ -6,30 +6,46 @@ namespace HTMLAnalysis.Domain.Frequencies
 {
     public class FrequencyRepository : IFrequencyRepository
     {
-        readonly IEncryptionService _encryptionService;
-        readonly WebFrequenciesDbContext _context;
+        private readonly IFrequencyAdapter _adapter;
+        private readonly WebFrequenciesDbContext _context;
 
         public FrequencyRepository(
-            IEncryptionService encryptionService,
+            IFrequencyAdapter adapter,
             WebFrequenciesDbContext context)
         {
-            _encryptionService = encryptionService;
+            _adapter = adapter;
             _context = context;
         }
 
-        public IEnumerable<IFrequency> GetAll()
+        public IEnumerable<IFrequency> GetConsolidated()
         {
-            return _context.Frequencies
-                           .Select(frequencyEntity => ToIFrequency(frequencyEntity))
-                           .AsEnumerable();
+            var map = MapFrequencies();
+            return ReduceFrequenciesOf(map);
         }
 
-        IFrequency ToIFrequency(FrequencyEntity frequencyEntity)
+        IEnumerable<IFrequency> MapFrequencies()
         {
-            var saltedHash = frequencyEntity.SaltedHash;
-            var saltedWord = _encryptionService.UnhashSaltedHash(saltedHash);
-            var unsaltedWord = _encryptionService.UnsaltSaltedWord(saltedWord);
-            return new Frequency(unsaltedWord, frequencyEntity.Count);
+            return _context
+                .Frequencies
+                .OrderByDescending(d => d.Count)
+                .Select(frequencyEntity => _adapter.ToIFrequency(frequencyEntity))
+                .ToArray();
+        }
+
+        IEnumerable<IFrequency> ReduceFrequenciesOf(IEnumerable<IFrequency> map)
+        {
+            var dictionary = new Dictionary<string, int>();
+            foreach (var frequency in map)
+            {
+                var currentCount = dictionary.GetValueOrDefault(frequency.Word, 0);
+                dictionary[frequency.Word] = currentCount + frequency.Count;
+            }
+
+            return dictionary
+                .ToList()
+                .OrderByDescending(kv => kv.Value)
+                .Select(kv => new Frequency(kv.Key, kv.Value))
+                .ToArray();
         }
     }
 }

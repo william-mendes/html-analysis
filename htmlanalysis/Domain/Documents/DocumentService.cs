@@ -8,7 +8,7 @@ namespace HTMLAnalysis.Domain.Documents
 {
     public class DocumentService : IDocumentService
     {
-        readonly HttpClient _httpClient;
+        private readonly HttpClient _httpClient;
 
         public DocumentService(HttpClient httpClient)
         {

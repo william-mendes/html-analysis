@@ -25,21 +25,13 @@
         /// <returns>The password.</returns>
         /// <param name="word">Word.</param>
         /// <param name="saltedHash">Salted hash.</param>
-        string EncryptedWord(string word, string saltedHash);
+        string EncryptedWord(string word);
 
         /// <summary>
-        /// Unhashes the salted hash using a server side key.
+        /// Decrypts the word.
         /// </summary>
-        /// <returns>The salted hash.</returns>
-        /// <param name="saltedHash">Salted hash.</param>
-        string UnhashSaltedHash(string saltedHash);
-
-
-        /// <summary>
-        /// Unsalts the salted word, by removing the salt from the word.
-        /// </summary>
-        /// <returns>The salted word.</returns>
-        /// <param name="saltedWord">Salted word.</param>
-        string UnsaltSaltedWord(object saltedWord);
+        /// <returns>The word.</returns>
+        /// <param name="word">Word.</param>
+        string DecryptWord(string word);
     }
 }

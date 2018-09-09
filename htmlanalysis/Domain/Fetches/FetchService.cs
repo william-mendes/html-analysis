@@ -4,7 +4,7 @@ namespace HTMLAnalysis.Domain.Fetches
 {
     public class FetchService : IFetchService
     {
-        readonly IFetchRepository _repository;
+        private readonly IFetchRepository _repository;
 
         public FetchService(IFetchRepository repository)
         {
