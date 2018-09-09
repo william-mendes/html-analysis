@@ -48,15 +48,15 @@ namespace HTMLAnalysis.Domain.Encryption
             return builder.ToString();
         }
 
-        public string EncryptedWord(string word)
+        public string EncryptWord(string word)
         {
-            var encryptedWord = _cryptoProvider.EncryptValue(_encoding.GetBytes(word));
+            var encryptedWord = _cryptoProvider.Encrypt(_encoding.GetBytes(word), false);
             return Convert.ToBase64String(encryptedWord);
         }
 
         public string DecryptWord(string encryptedWord)
         {
-            var decryptedBuffer = _cryptoProvider.EncryptValue(_encoding.GetBytes(encryptedWord));
+            var decryptedBuffer = _cryptoProvider.Decrypt(_encoding.GetBytes(encryptedWord), false);
             return _encoding.GetString(decryptedBuffer);
         }
 

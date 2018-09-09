@@ -80,7 +80,7 @@ namespace HTMLAnalysis.Domain.Fetches
             var expected = "encrypted-word";
 
             _encryptionServiceMock
-                .Setup(x => x.EncryptedWord(It.IsAny<string>()))
+                .Setup(x => x.EncryptWord(It.IsAny<string>()))
                 .Returns<string>((word) => expected);
 
             var fetch = _fetchMock.Object;

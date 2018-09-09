@@ -25,7 +25,7 @@
         /// <returns>The password.</returns>
         /// <param name="word">Word.</param>
         /// <param name="saltedHash">Salted hash.</param>
-        string EncryptedWord(string word);
+        string EncryptWord(string word);
 
         /// <summary>
         /// Decrypts the word.
