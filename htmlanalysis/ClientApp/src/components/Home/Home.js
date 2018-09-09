@@ -13,10 +13,14 @@ export class Home extends Component {
     }
 
     handleSubmit(evt) {
-
-        var url = this.state.url;
-
-        fetch('api/frequencies/read?url=' + url)
+        fetch('api/frequencies/fetch', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify( this.state.url )
+        })
         .then(response => response.json())
         .then(data => {
             this.setState({ wordsFrequencies: data.frequencies, loading: false });

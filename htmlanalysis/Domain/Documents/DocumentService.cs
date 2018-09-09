@@ -33,7 +33,6 @@ namespace HTMLAnalysis.Domain.Documents
             var html = new HtmlDocument();
             html.LoadHtml(content);
 
-            var title = WebUtility.HtmlDecode(html.DocumentNode.SelectSingleNode("//head/title").InnerText).Trim();
             var body = WebUtility.HtmlDecode(html.DocumentNode.SelectSingleNode("//body").InnerText).Trim();
             return new Document(url, body);
         }

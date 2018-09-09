@@ -5,11 +5,12 @@ namespace HTMLAnalysis.Domain.Frequencies
 {
     public class FrequencyEntity
     {
-        public virtual FetchEntity Analysis { get; set; }
+        public virtual FetchEntity Fetch { get; set; }
 
         [Key]
         public string SaltedHash { get; set; }
 
+        [Required]
         public string EncryptedWord { get; set; }
 
         public int Count { get; set; }

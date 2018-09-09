@@ -11,36 +11,41 @@ namespace HTMLAnalysis.Controllers
     {
         readonly IDocumentService _documentService;
         readonly IFetchService _fetchService;
-        readonly IFrequencyRepository _frequencyService;
+        readonly IFrequencyRepository _frequencyRepository;
 
 
         public FrequenciesController(
             IDocumentService documentService,
             IFetchService fetchService,
-            IFrequencyRepository frequencyService)
+            IFrequencyRepository frequencyRepository)
         {
             _documentService = documentService;
             _fetchService = fetchService;
-            _frequencyService = frequencyService;
+            _frequencyRepository = frequencyRepository;
         }
 
         [HttpPost("[action]")]
         public async Task<IActionResult> Fetch([FromBody] string url)
         {
+            if (string.IsNullOrEmpty(url))
+            {
+                return BadRequest();
+            }
+
             var document = await _documentService.DownloadIntoDocumentAsync(url).ConfigureAwait(false);
             if (document != null)
             {
-                var analysis = _fetchService.Analyse(document);
-                return Ok(analysis);
+                var fetc = await _fetchService.ProcessAsync(document);
+                return Ok(fetc);
             }
 
             return NotFound();
         }
 
         [HttpGet("[action]")]
-        public async Task<IActionResult> GetAll()
+        public IActionResult GetAll()
         {
-            var topFrequencies = await _frequencyService.GetAll().ConfigureAwait(false);
+            var topFrequencies = _frequencyRepository.GetAll();
             if (topFrequencies != null && topFrequencies.Any())
             {
                 return Ok(topFrequencies);
