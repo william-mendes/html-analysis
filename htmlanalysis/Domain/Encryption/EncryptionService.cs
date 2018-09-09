@@ -1,11 +1,31 @@
 ﻿using System;
 using System.Security.Cryptography;
+using System.Text;
 
 namespace HTMLAnalysis.Domain.Encryption
 {
-    public class EncryptionService : IEncryptionService
+    public class EncryptionService : IEncryptionService, IDisposable
     {
         const int SaltLength = 32;
+
+        readonly SHA256Managed _hashProvider;
+        readonly RNGCryptoServiceProvider _saltProvider;
+        readonly RSACryptoServiceProvider _cryptoProvider;
+        readonly Encoding _encoding;
+
+        public EncryptionService()
+        {
+            _hashProvider = new SHA256Managed();
+            _saltProvider = new RNGCryptoServiceProvider();
+            _cryptoProvider = new RSACryptoServiceProvider();
+            _encoding = Encoding.UTF8;
+        }
+
+        public void Dispose()
+        {
+            _saltProvider.Dispose();
+            _cryptoProvider.Dispose();
+        }
 
         public string NewSalt
         {
@@ -18,24 +38,27 @@ namespace HTMLAnalysis.Domain.Encryption
             }
         }
 
-        public string EncryptedWord(string password, string saltedHash)
-        {
-            throw new System.NotImplementedException();
-        }
-
         public string SaltedHash(string word, string salt)
         {
-            throw new System.NotImplementedException();
+            var input = string.Concat(word, salt);
+            var data = _hashProvider.ComputeHash(_encoding.GetBytes(input));
+            var builder = new StringBuilder();
+            for (int i = 0; i < data.Length; i++)
+                builder.Append(data[i].ToString("x2"));
+            return builder.ToString();
         }
 
-        public string UnhashSaltedHash(string saltedHash)
+        public string EncryptedWord(string word)
         {
-            throw new NotImplementedException();
+            var encryptedWord = _cryptoProvider.EncryptValue(_encoding.GetBytes(word));
+            return Convert.ToBase64String(encryptedWord);
         }
 
-        public string UnsaltSaltedWord(object saltedWord)
+        public string DecryptWord(string encryptedWord)
         {
-            throw new NotImplementedException();
+            var decryptedBuffer = _cryptoProvider.EncryptValue(_encoding.GetBytes(encryptedWord));
+            return _encoding.GetString(decryptedBuffer);
         }
+
     }
 }

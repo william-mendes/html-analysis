@@ -1,22 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
-using HTMLAnalysis.Domain.Frequencies;
 using HTMLAnalysis.Infra;
 
 namespace HTMLAnalysis.Domain.Fetches
 {
     public class FetchRepository : IFetchRepository
     {
-        readonly IEncryptionService _encryptionService;
-        readonly WebFrequenciesDbContext _context;
+        private readonly IFrequencyAdapter _frequencyAdapter;
+        private readonly WebFrequenciesDbContext _context;
 
         public FetchRepository(
-            IEncryptionService encryptionService,
+            IFrequencyAdapter frequencyAdapter,
             WebFrequenciesDbContext context)
         {
-            _encryptionService = encryptionService;
+            _frequencyAdapter = frequencyAdapter;
             _context = context;
         }
 
@@ -56,18 +53,9 @@ namespace HTMLAnalysis.Domain.Fetches
             {
                 foreach (var frequency in fetch.Frequencies.Take(n))
                 {
-                    var frequencyEntity = _context.Frequencies.FirstOrDefault(f => f.Fetch.Source == fetchEntity.Source);
-                    if (frequencyEntity == null)
-                    {
-                        var salt = _encryptionService.NewSalt;
-                        var saltedHash = _encryptionService.SaltedHash(frequency.Word, salt);
-                        frequencyEntity = new FrequencyEntity();
-                        frequencyEntity.Fetch = fetchEntity;
-                        frequencyEntity.SaltedHash = saltedHash;
-                        frequencyEntity.EncryptedWord = _encryptionService.EncryptedWord(frequency.Word, saltedHash);
-                        frequencyEntity.Count = frequency.Count;
-                        _context.Frequencies.Add(frequencyEntity);
-                    }
+                    var frequencyEntity = _frequencyAdapter.ToFrequencyEntity(frequency);
+                    frequencyEntity.Fetch = fetchEntity;
+                    _context.Frequencies.Add(frequencyEntity);
                 }
 
                 await _context.SaveChangesAsync();

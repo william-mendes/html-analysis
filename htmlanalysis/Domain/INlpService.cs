@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace HTMLAnalysis.Domain
+﻿namespace HTMLAnalysis.Domain
 {
     /// <summary>
     /// Provides domain logic that is related to <see cref="INlp"/>

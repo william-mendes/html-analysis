@@ -27,7 +27,6 @@ namespace HTMLAnalysis.Domain.Fetches
                 .OrderByDescending(d => d.Value)
                 .ToArray()
                 .Select(pair => new Frequency(pair.Key, pair.Value))
-                .Take(100)
                 .ToArray();
 
         static IDictionary<string, int> ExtractFrequenciesFrom(IDocument document) => 

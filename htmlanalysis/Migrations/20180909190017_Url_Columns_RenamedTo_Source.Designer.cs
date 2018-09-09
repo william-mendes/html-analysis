@@ -3,14 +3,16 @@ using System;
 using HTMLAnalysis.Infra;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HTMLAnalysis.Migrations
 {
     [DbContext(typeof(WebFrequenciesDbContext))]
-    partial class WebFrequenciesDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180909190017_Url_Columns_RenamedTo_Source")]
+    partial class Url_Columns_RenamedTo_Source
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

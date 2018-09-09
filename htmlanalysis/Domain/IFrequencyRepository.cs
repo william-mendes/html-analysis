@@ -4,6 +4,6 @@ namespace HTMLAnalysis.Domain.Frequencies
 {
     public interface IFrequencyRepository
     {
-        IEnumerable<IFrequency> GetAll();
+        IEnumerable<IFrequency> GetConsolidated();
     }
 }
