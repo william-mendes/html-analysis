@@ -15,7 +15,7 @@
             var saltedHash = _encryptionService.SaltedHash(frequency.Word, salt);
             var frequencyEntity = new FrequencyEntity();
             frequencyEntity.SaltedHash = saltedHash;
-            frequencyEntity.EncryptedWord = _encryptionService.EncryptedWord(frequency.Word);
+            frequencyEntity.EncryptedWord = _encryptionService.EncryptWord(frequency.Word);
             frequencyEntity.Count = frequency.Count;
             return frequencyEntity;
         }

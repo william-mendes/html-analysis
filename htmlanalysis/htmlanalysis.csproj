@@ -19,8 +19,12 @@
 
   <ItemGroup>
     <!-- Don't publish the SPA source files, but do show them in the project files list -->
+    <Compile Remove="Domain\NLP\**" />
     <Content Remove="$(SpaRoot)**" />
+    <Content Remove="Domain\NLP\**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
+    <EmbeddedResource Remove="Domain\NLP\**" />
+    <None Remove="Domain\NLP\**" />
     <Content Remove="Pages\Error.cshtml" />
   </ItemGroup>
 
@@ -28,7 +32,6 @@
     <Folder Include="Domain\Documents\" />
     <Folder Include="Domain\Fetches\" />
     <Folder Include="Domain\Tokenization\" />
-    <Folder Include="Domain\NLP\" />
     <Folder Include="Infra\" />
   </ItemGroup>
   <ItemGroup>
