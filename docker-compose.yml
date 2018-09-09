@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  webapplicationcore:
+    image: htmlanalysis
+    build:
+      context: .
+      dockerfile: htmlanalysis/Dockerfile
+    ports:
+      - "5000:80"
