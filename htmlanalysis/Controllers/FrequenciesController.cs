@@ -1,8 +1,9 @@
 ﻿using System.Threading.Tasks;
-using HTMLAnalysis.Domain.Analysis;
+using HTMLAnalysis.Domain.Fetches;
 using HTMLAnalysis.Domain.Documents;
 using HTMLAnalysis.Domain.Frequencies;
 using Microsoft.AspNetCore.Mvc;
+using HTMLAnalysis.Domain;
 
 namespace HTMLAnalysis.Controllers
 {
@@ -10,13 +11,14 @@ namespace HTMLAnalysis.Controllers
     public class FrequenciesController : Controller
     {
         private readonly IDocumentService _documentService;
-        private readonly IAnalysisService _analysisService;
-        private readonly IFrequencyService _frequencyService;
+        private readonly IFetchService _analysisService;
+        private readonly IFrequencyRepository _frequencyService;
+
 
         public FrequenciesController(
             IDocumentService documentService,
-            IAnalysisService analysisService,
-            IFrequencyService frequencyService)
+            IFetchService analysisService,
+            IFrequencyRepository frequencyService)
         {
             _documentService = documentService;
             _analysisService = analysisService;

@@ -5,14 +5,17 @@ using HTMLAnalysis.Domain.Tokenization;
 
 namespace HTMLAnalysis.Domain.Documents
 {
-    public class Document
+    public class Document : IDocument
     {
-        public Document(string body)
+        public Document(string url, string body)
         {
+            Source = url;
             Body = body;
             Phrases = ExtractPhrasesFromBody(body);
             Words = ExtractWordsFrom(Phrases);
         }
+
+        public string Source { get; private set; }
 
         public string Body { get; private set; }
 

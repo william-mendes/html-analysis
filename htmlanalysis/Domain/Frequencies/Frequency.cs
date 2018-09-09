@@ -1,6 +1,6 @@
 ﻿namespace HTMLAnalysis.Domain.Frequencies
 {
-    public class Frequency
+    public class Frequency : IFrequency
     {
         public Frequency(string word, int count)
         {

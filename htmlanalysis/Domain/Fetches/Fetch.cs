@@ -3,23 +3,26 @@ using System.Linq;
 using HTMLAnalysis.Domain.Documents;
 using HTMLAnalysis.Domain.Frequencies;
 
-namespace HTMLAnalysis.Domain.Analysis
+namespace HTMLAnalysis.Domain.Fetches
 {
-    public class AnalysisResult
+    public class Fetch : IFetch
     {
-        public AnalysisResult(Document document)
+        public Fetch(IDocument document)
         {
+            Source = document.Source;
             Frequencies = FrequencyListFrom(document);
         }
 
-        public IEnumerable<Frequency> Frequencies { get; private set; }
+        public string Source { get; private set; }
+
+        public IEnumerable<IFrequency> Frequencies { get; private set; }
 
         public int? FrequencyOf(string word) => 
             Frequencies
                 .FirstOrDefault(f => f.Word.Equals(word))
                 ?.Count;
 
-        static IEnumerable<Frequency> FrequencyListFrom(Document document) => 
+        static IEnumerable<IFrequency> FrequencyListFrom(IDocument document) => 
             ExtractFrequenciesFrom(document)
                 .ToList()
                 .OrderByDescending(d => d.Value)
@@ -28,7 +31,7 @@ namespace HTMLAnalysis.Domain.Analysis
                 .Take(100)
                 .ToArray();
 
-        static IDictionary<string, int> ExtractFrequenciesFrom(Document document) => 
+        static IDictionary<string, int> ExtractFrequenciesFrom(IDocument document) => 
             document
                 .Words
                 .Distinct()
