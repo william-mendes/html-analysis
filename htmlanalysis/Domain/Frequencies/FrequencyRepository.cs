@@ -43,8 +43,9 @@ namespace HTMLAnalysis.Domain.Frequencies
 
             return dictionary
                 .ToList()
-                .OrderByDescending(kv => kv.Value)
                 .Select(kv => new Frequency(kv.Key, kv.Value))
+                .OrderByDescending(kv => kv.Count)
+                .Take(100)
                 .ToArray();
         }
     }

@@ -14,7 +14,8 @@ export default class ReportFrequencyTable extends Component {
                 </thead>
                 <tbody>
                     {wordsFrequencies
-                        .sort((a, b) => a.count < b.count)
+                        .sort((a, b) => a.count - b.count)
+                        .reverse()
                         .map(wordFrequency =>
                         <tr key={wordFrequency.word}>
                             <td>{wordFrequency.word}</td>
