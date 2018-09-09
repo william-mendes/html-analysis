@@ -1,6 +1,9 @@
 ﻿using System;
+using System.IO;
 using System.Security.Cryptography;
 using System.Text;
+using HTMLAnalysis.Infra;
+using Microsoft.Extensions.Configuration;
 
 namespace HTMLAnalysis.Domain.Encryption
 {
@@ -8,21 +11,25 @@ namespace HTMLAnalysis.Domain.Encryption
     {
         const int SaltLength = 32;
 
-        readonly SHA256Managed _hashProvider;
-        readonly RNGCryptoServiceProvider _saltProvider;
-        readonly RSACryptoServiceProvider _cryptoProvider;
         readonly Encoding _encoding;
+        readonly RSACryptoServiceProvider _cryptoProvider;
+        readonly RNGCryptoServiceProvider _saltProvider;
+        readonly SHA256Managed _hashProvider;
 
-        public EncryptionService()
+        public EncryptionService(IConfiguration configuration)
         {
-            _hashProvider = new SHA256Managed();
-            _saltProvider = new RNGCryptoServiceProvider();
             _cryptoProvider = new RSACryptoServiceProvider();
+            var encryptionKey = configuration.GetValue<string>("EncryptionKey");
+            _cryptoProvider.ImportCspBlob(Convert.FromBase64String(encryptionKey));
+
+            _saltProvider = new RNGCryptoServiceProvider();
+            _hashProvider = new SHA256Managed();
             _encoding = Encoding.UTF8;
         }
 
         public void Dispose()
         {
+            _hashProvider.Dispose();
             _saltProvider.Dispose();
             _cryptoProvider.Dispose();
         }
@@ -31,9 +38,8 @@ namespace HTMLAnalysis.Domain.Encryption
         {
             get
             {
-                var random = new RNGCryptoServiceProvider();
                 var salt = new byte[SaltLength];
-                random.GetNonZeroBytes(salt);
+                _saltProvider.GetNonZeroBytes(salt);
                 return Convert.ToBase64String(salt);
             }
         }
@@ -56,7 +62,7 @@ namespace HTMLAnalysis.Domain.Encryption
 
         public string DecryptWord(string encryptedWord)
         {
-            var decryptedBuffer = _cryptoProvider.Decrypt(_encoding.GetBytes(encryptedWord), false);
+            var decryptedBuffer = _cryptoProvider.Decrypt(Convert.FromBase64String(encryptedWord), false);
             return _encoding.GetString(decryptedBuffer);
         }
 
