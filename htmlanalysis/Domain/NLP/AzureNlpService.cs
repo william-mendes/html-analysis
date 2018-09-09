@@ -20,7 +20,7 @@ namespace HTMLAnalysis.Domain.NLP
             _httpClient = httpClient;
         }
 
-        public IEnumerable<string> Parse(string phrase)
+        public INlp Parse(string phrase)
         {
             var request = new AzureNlpRequest(
                 new[] { "22a6b758-420f-4745-8a3c-46835a67c0d2" /* Constituency_Tree, PennTreebank3 */ },
@@ -38,9 +38,8 @@ namespace HTMLAnalysis.Domain.NLP
 
             var result = JsonConvert.DeserializeObject<AzureNlpResponse[]>(responseBody);
 
-            return (result.Length > 0)
-                    ? result.ToList()[0].Result
-                    : new string[0];
+            //todo: convert the response into a parse tree
+            return new Nlp(phrase);
         }
     }
 }

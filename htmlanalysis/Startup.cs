@@ -1,11 +1,14 @@
 using System.Net.Http;
-using HTMLAnalysis.Domain.Analysis;
+using HTMLAnalysis.Domain;
 using HTMLAnalysis.Domain.Documents;
+using HTMLAnalysis.Domain.Fetches;
 using HTMLAnalysis.Domain.Frequencies;
+using HTMLAnalysis.Infra;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -24,11 +27,18 @@ namespace HTMLAnalysis
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<HttpClient>()
-                .AddTransient<IDocumentService, DocumentService>()
-                .AddTransient<IAnalysisService, AnalysisService>()
-                .AddTransient<IFrequencyService, FrequencyService>();
+                    .AddTransient<IDocumentService, DocumentService>()
+                    .AddTransient<IFetchService, FetchService>()
+                    .AddTransient<IFrequencyRepository, FrequencyRepository>();
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddEntityFrameworkMySql()
+                    .AddDbContext<WebFrequenciesDbContext>(options =>
+                    {
+                        options.UseMySql(Configuration.GetConnectionString("DefaultConnection"));
+                    });
+
+            services.AddMvc()
+                    .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>

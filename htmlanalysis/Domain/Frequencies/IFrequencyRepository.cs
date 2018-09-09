@@ -3,8 +3,8 @@ using System.Threading.Tasks;
 
 namespace HTMLAnalysis.Domain.Frequencies
 {
-    public interface IFrequencyService
+    public interface IFrequencyRepository
     {
-        Task<List<Frequency>> GetAll();
+        Task<IEnumerable<IFrequency>> GetAll();
     }
 }

@@ -8,25 +8,25 @@ namespace HTMLAnalysis.Domain.Documents
 {
     public class DocumentService : IDocumentService
     {
-        private readonly HttpClient _httpClient;
+        readonly HttpClient _httpClient;
 
         public DocumentService(HttpClient httpClient)
         {
             _httpClient = httpClient;
         }
 
-        public async Task<Document> DownloadIntoDocumentAsync(string url)
+        public async Task<IDocument> DownloadIntoDocumentAsync(string url)
         {
             var document = null as Document;
 
             var response = await _httpClient.GetAsync(new Uri(url));
             if (response != null && response.IsSuccessStatusCode)
-                document = await ProcessSuccessfulGet(response);
+                document = await ProcessSuccessfulGet(url, response);
 
             return document;
         }
 
-        static async Task<Document> ProcessSuccessfulGet(HttpResponseMessage response)
+        static async Task<Document> ProcessSuccessfulGet(string url, HttpResponseMessage response)
         {
             var content = await response.Content.ReadAsStringAsync();
 
@@ -35,7 +35,7 @@ namespace HTMLAnalysis.Domain.Documents
 
             var title = WebUtility.HtmlDecode(html.DocumentNode.SelectSingleNode("//head/title").InnerText).Trim();
             var body = WebUtility.HtmlDecode(html.DocumentNode.SelectSingleNode("//body").InnerText).Trim();
-            return new Document(body);
+            return new Document(url, body);
         }
     }
 }
