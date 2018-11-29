@@ -1,4 +1,4 @@
-# Code challenge
+# HTML Analysis
 This is a web application created to process a website's words frequency
 
 ## Access deployed version
