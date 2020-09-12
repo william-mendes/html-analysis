@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <LangVersion>7.1</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Core\HtmlAnalysis.Core.DataAccess\HtmlAnalysis.Core.DataAccess.csproj" />
+    <ProjectReference Include="..\..\Business\HtmlAnalysis.Service.Contracts\HtmlAnalysis.Service.Contracts.csproj" />
+    <ProjectReference Include="..\HtmlAnalysis.DataAccess.Database.Contracts\HtmlAnalysis.DataAccess.Database.Contracts.csproj" />
+  </ItemGroup>
+
+</Project>
