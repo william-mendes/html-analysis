@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <LangVersion>7.1</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.24" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="3.1.8" />
+    <PackageReference Include="Autofac" Version="5.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Core\HtmlAnalysis.Core.DataContracts\HtmlAnalysis.Core.DataContracts.csproj" />
+    <ProjectReference Include="..\..\..\Core\HtmlAnalysis.Core.Domain\HtmlAnalysis.Core.Domain.csproj" />
+    <ProjectReference Include="..\..\DataAccess\HtmlAnalysis.DataAccess.Database.Contracts\HtmlAnalysis.DataAccess.Database.Contracts.csproj" />
+    <ProjectReference Include="..\HtmlAnalysis.Service.Contracts\HtmlAnalysis.Service.Contracts.csproj" />
+  </ItemGroup>
+
+</Project>
