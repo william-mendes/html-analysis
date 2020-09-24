@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using HtmlAnalysis.Core.DataAccess;
+using Microsoft.EntityFrameworkCore;
 
 namespace HtmlAnalysis.TestUtils
 {

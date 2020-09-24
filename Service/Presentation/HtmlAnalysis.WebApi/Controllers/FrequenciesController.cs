@@ -1,5 +1,6 @@
 ﻿using HtmlAnalysis.DataAccess.Database.Contracts;
 using HtmlAnalysis.Service.Contracts.Services;
+using HtmlAnalysis.WebApi.ViewModels.Requests;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
@@ -7,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace HtmlAnalysis.WebApi
 {
-    [Route("api/[controller]")]
-    public class FrequenciesController : Controller
+    [Route("api/frequencies")]
+    public class FrequenciesController : ControllerBase
     {
         private readonly IDocumentService _documentService;
         private readonly IFetchService _fetchService;
@@ -24,10 +25,18 @@ namespace HtmlAnalysis.WebApi
             _frequencyRepository = frequencyRepository;
         }
 
-        [HttpPost("[action]")]
-        public async Task<IActionResult> Fetch([FromBody] string url)
+        [HttpGet]
+        public IActionResult GetAll()
         {
-            Uri uri = ValidateUrl(url);
+            var result = _frequencyRepository.GetConsolidated();
+
+            return Ok(result);
+        }
+
+        [HttpPost("fetch")]
+        public async Task<IActionResult> Fetch([FromBody] FetchRequest request)
+        {
+            Uri uri = ValidateUrl(request.Url);
             if (uri != null)
             {
                 var document = await _documentService.DownloadIntoDocumentAsync(uri.ToString()).ConfigureAwait(false);
@@ -43,18 +52,6 @@ namespace HtmlAnalysis.WebApi
             {
                 return BadRequest();
             }
-        }
-
-        [HttpGet("[action]")]
-        public IActionResult GetAll()
-        {
-            var topFrequencies = _frequencyRepository.GetConsolidated();
-            if (topFrequencies != null && topFrequencies.Any())
-            {
-                return Ok(topFrequencies);
-            }
-
-            return NotFound();
         }
 
         private Uri ValidateUrl(string url)

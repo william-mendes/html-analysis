@@ -1,4 +1,10 @@
 ﻿using System.Linq;
+using HtmlAnalysis.Core.DataAccess;
+using HtmlAnalysis.DataAccess.Database.Contracts;
+using HtmlAnalysis.DataAccess.Database.Implementation;
+using HtmlAnalysis.Domain.Data;
+using HtmlAnalysis.Service.Contracts.Services;
+using HtmlAnalysis.Service.Implementation.Adapters;
 using HtmlAnalysis.TestFixtures;
 using HtmlAnalysis.TestUtils;
 using Moq;
@@ -10,7 +16,7 @@ namespace HtmlAnalysis.Domain.Fetches
     {
         readonly WebFrequenciesDbContext _context;
         readonly Mock<IEncryptionService> _encryptionServiceMock;
-        readonly Mock<IFetch> _fetchMock;
+        readonly Mock<Fetch> _fetchMock;
 
         public FetchRepositorySliceTest()
         {

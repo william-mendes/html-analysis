@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>HtmlAnalysis</RootNamespace>
 
     <IsPackable>false</IsPackable>
@@ -29,9 +29,11 @@
     <Folder Include="TestUtils\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Core\HtmlAnalysis.Core.DataAccess\HtmlAnalysis.Core.DataAccess.csproj" />
     <ProjectReference Include="..\..\Core\HtmlAnalysis.Core.Domain\HtmlAnalysis.Core.Domain.csproj" />
     <ProjectReference Include="..\..\Service\Business\HtmlAnalysis.Service.Contracts\HtmlAnalysis.Service.Contracts.csproj" />
-    <ProjectReference Include="..\..\Service\DataAccess\HtmlAnalysis.DataAccess.Database.Contracts\HtmlAnalysis.DataAccess.Database.Contracts.csproj" />
+    <ProjectReference Include="..\..\Service\Business\HtmlAnalysis.Service.Implementation\HtmlAnalysis.Service.Implementation.csproj" />
+    <ProjectReference Include="..\..\Service\DataAccess\HtmlAnalysis.DataAccess.Database.Implementation\HtmlAnalysis.DataAccess.Database.Implementation.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Update="TestFixtures\Htmls\StanfordCoreNLP.html">

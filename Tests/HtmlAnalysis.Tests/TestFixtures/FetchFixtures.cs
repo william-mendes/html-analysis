@@ -1,4 +1,6 @@
-﻿using Moq;
+﻿using HtmlAnalysis.Core.Domain.Data;
+using HtmlAnalysis.Domain.Data;
+using Moq;
 using System;
 using System.Linq;
 

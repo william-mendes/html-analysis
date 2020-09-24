@@ -1,4 +1,10 @@
 ﻿using System.Linq;
+using HtmlAnalysis.Core.DataAccess;
+using HtmlAnalysis.Core.Domain.Entities;
+using HtmlAnalysis.DataAccess.Database.Contracts;
+using HtmlAnalysis.DataAccess.Database.Implementation;
+using HtmlAnalysis.Service.Contracts.Services;
+using HtmlAnalysis.Service.Implementation.Adapters;
 using HtmlAnalysis.TestUtils;
 using Moq;
 using Xunit;
@@ -13,8 +19,9 @@ namespace HtmlAnalysis.Domain.Frequencies
     /// </summary>
     public class FrequencyRepositorySliceTest
     {
-        static readonly WebFrequenciesDbContext _context;
-        readonly Mock<IEncryptionService> _encryptionServiceMock;
+        private static readonly WebFrequenciesDbContext _context;
+        private static Mock<IDbContextFactory> _contextFactoryMock;
+        private readonly Mock<IEncryptionService> _encryptionServiceMock;
 
         static FrequencyRepositorySliceTest()
         {
@@ -22,6 +29,8 @@ namespace HtmlAnalysis.Domain.Frequencies
             _context.Frequencies.Add(new FrequencyEntity { @EncryptedWord = "encrypted1", Count = 15 });
             _context.Frequencies.Add(new FrequencyEntity { @EncryptedWord = "encrypted2", Count = 20 });
             _context.SaveChanges();
+
+            _contextFactoryMock.Setup(x => x.GetContext()).Returns(_context);
         }
 
         public FrequencyRepositorySliceTest()
@@ -51,7 +60,6 @@ namespace HtmlAnalysis.Domain.Frequencies
         }
 
         IFrequencyRepository Repository => new FrequencyRepository(
-            new FrequencyAdapter(_encryptionServiceMock.Object),
-            _context);
+            new FrequencyAdapter(_encryptionServiceMock.Object), _contextFactoryMock.Object);
     }
 }

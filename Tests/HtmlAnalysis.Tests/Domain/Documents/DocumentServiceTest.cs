@@ -1,6 +1,8 @@
 ﻿using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using HtmlAnalysis.Service.Contracts.Services;
+using HtmlAnalysis.Service.Implementation.Services;
 using HtmlAnalysis.TestFixtures;
 using RichardSzalay.MockHttp;
 using Xunit;

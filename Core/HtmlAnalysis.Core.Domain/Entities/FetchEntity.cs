@@ -9,8 +9,7 @@ namespace HtmlAnalysis.Core.Domain.Entities
         [Key]
         public string Source { get; set; }
 
-        [Timestamp]
-        public DateTime Timestamp { get; set; }
+        public DateTime CreatedAt { get; set; }
 
         public virtual ICollection<FrequencyEntity> Frequencies { get; set; }
     }

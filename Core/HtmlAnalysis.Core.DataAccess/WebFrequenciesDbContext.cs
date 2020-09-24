@@ -5,10 +5,13 @@ namespace HtmlAnalysis.Core.DataAccess
 {
     public class WebFrequenciesDbContext : DbContext
     {
-        public WebFrequenciesDbContext(DbContextOptions<WebFrequenciesDbContext> options) : base(options) { }
+        public WebFrequenciesDbContext(DbContextOptions<WebFrequenciesDbContext> options)
+            : base(options)
+        {
+        }
 
-        public DbSet<FetchEntity> Fetches { get; set; }
+        public virtual DbSet<FetchEntity> Fetches { get; set; }
 
-        public DbSet<FrequencyEntity> Frequencies { get; set; }
+        public virtual DbSet<FrequencyEntity> Frequencies { get; set; }
     }
 }

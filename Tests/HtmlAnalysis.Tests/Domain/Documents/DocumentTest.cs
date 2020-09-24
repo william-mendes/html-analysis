@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using HtmlAnalysis.Domain.Data;
+using System.Linq;
 using Xunit;
 
 namespace HtmlAnalysis.Domain.Documents
@@ -8,7 +9,7 @@ namespace HtmlAnalysis.Domain.Documents
         const string Url = "http://www.a-walk-in-the-park.com";
         const string Body = "Today,\nI went to the beach.It was great; there were nice birds flying over the ocean.";
 
-        readonly IDocument _document;
+        readonly Document _document;
 
         public DocumentTest() {
 

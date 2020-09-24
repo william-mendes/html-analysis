@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using HtmlAnalysis.Domain.Data;
 using Moq;
 using Xunit;
 
@@ -9,12 +10,12 @@ namespace HtmlAnalysis.Domain.Fetches
     {
         static readonly IEnumerable<string> Words = new[] { "word1", "word2", "word1", "word3", "word1", "word4", "word31" };
 
-        readonly Mock<IDocument> _documentMock;
+        readonly Mock<Document> _documentMock;
         readonly Fetch _analysis;
 
         public FetchTest()
         {
-            _documentMock = new Mock<IDocument>();
+            _documentMock = new Mock<Document>();
             _documentMock.SetupGet(x => x.Words).Returns(Words);
 
             _analysis = new Fetch(_documentMock.Object);

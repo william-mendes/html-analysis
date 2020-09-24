@@ -13,7 +13,6 @@
 
   <ItemGroup>
     <Folder Include="ViewModels\Responses\" />
-    <Folder Include="ViewModels\Requests\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using HtmlAnalysis.Service.Contracts.Services;
+using HtmlAnalysis.Service.Implementation.Services;
 using Microsoft.Extensions.Configuration;
 using Xunit;
 
